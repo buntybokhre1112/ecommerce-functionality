@@ -8,8 +8,8 @@ import { FilterContextProvider } from './context/filter_context';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-  <AppProvider> {/* 04 */}
-     <FilterContextProvider>{/* 18 */}
+  <AppProvider> 
+     <FilterContextProvider>
       <App />
      </FilterContextProvider>
   </AppProvider>
