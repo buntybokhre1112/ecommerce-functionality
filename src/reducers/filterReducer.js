@@ -1,6 +1,6 @@
 const filterReducer = (state, action) => {
-    switch (action.type) { //22
-      case "LOAD_FILTER_PRODUCTS"://23
+    switch (action.type) { 
+      case "LOAD_FILTER_PRODUCTS":
         return {
           ...state,
           filter_products: [...action.payload],
@@ -8,17 +8,17 @@ const filterReducer = (state, action) => {
         };
   
 
-      case "GET_SORT_VALUE": //24.3
+      case "GET_SORT_VALUE": 
 
         return {
           ...state,
           sorting_value: action.payload,
         };
   
-      case "SORTING_PRODUCTS": //24.7
-        let newSortData; //24.8
-        //let tempSortProduct = [...action.payload]; // 24.9
-        // 28
+      case "SORTING_PRODUCTS": 
+        let newSortData; 
+        //let tempSortProduct = [...action.payload];
+        
         const { filter_products, sorting_value } = state;
         let tempSortProduct = [...filter_products];
         // console.log('temsort', tempSortProduct);
@@ -43,7 +43,7 @@ const filterReducer = (state, action) => {
         };
   
         newSortData = tempSortProduct.sort(sortingProducts);
-        console.log('newSortData', newSortData);
+        //console.log('newSortData', newSortData);
         return {
           ...state,
           filter_products: newSortData,
