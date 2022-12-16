@@ -2,13 +2,12 @@ import { createContext, useContext, useReducer, useEffect } from "react";
 import { useProductContext } from "./productContext";
 import reducer from "../reducers/filterReducer";
 
-const FilterContext = createContext(); //17 --123
+const FilterContext = createContext(); 
 
-const initialState = { //20.1
+const initialState = { 
   filter_products: [],
   all_products: [],
-//   grid_view: true,
-  sorting_value: "lowest", //24.4
+  sorting_value: "lowest", 
   filters: {
     text: "",
     category: 'all',
@@ -16,17 +15,17 @@ const initialState = { //20.1
   },
 };
 
-export const FilterContextProvider = ({ children }) => { //17.1
-  const { products } = useProductContext(); //19
+export const FilterContextProvider = ({ children }) => { 
+  const { products } = useProductContext(); 
 
-  const [state, dispatch] = useReducer(reducer, initialState); //20
+  const [state, dispatch] = useReducer(reducer, initialState); 
 
 
-//   // sorting function // 24 --12345
+//   // sorting function 
   const sorting = (event) => {
     let userValue = event.target.value; 
     // console.log('userValue', userValue);
-    dispatch({ type: "GET_SORT_VALUE", payload: userValue }); //24.2
+    dispatch({ type: "GET_SORT_VALUE", payload: userValue }); 
   };
 
 //   // update the filter values
@@ -38,14 +37,14 @@ export const FilterContextProvider = ({ children }) => { //17.1
   };
 
 //   // to sort the product
-  useEffect(() => { //24.5 only sorting val[]
+  useEffect(() => { 
     dispatch({ type: "FILTER_PRODUCTS" });
-    dispatch({ type: "SORTING_PRODUCTS" }); //24.6
+    dispatch({ type: "SORTING_PRODUCTS" }); 
   }, [products,state.sorting_value,state.filters]);
   
 
 //   // to load all the products for grid and list view
-  useEffect(() => { //21 goto filter red f
+  useEffect(() => { 
     dispatch({ type: "LOAD_FILTER_PRODUCTS", payload: products });
   }, [products]);
 
@@ -55,12 +54,12 @@ export const FilterContextProvider = ({ children }) => { //17.1
         ...state,
         sorting,
         updateFilterValue,
-      }}>     {/* 17.2 // 24.1 pass sorting */}
+      }}>     
        {children}
     </FilterContext.Provider>
   );
 };
 
-export const useFilterContext = () => { //17.3 goto index f
+export const useFilterContext = () => {
   return useContext(FilterContext);
 };
