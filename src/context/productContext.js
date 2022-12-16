@@ -4,40 +4,38 @@ import reducer from '../reducers/productReducer'
 
 // import { createContext, useContext } from "react";
 
-const AppContext = createContext();// 1
+const AppContext = createContext();
 
 const API = "https://api.pujakaitem.com/api/products";
 
 
-const initialState = {   //10
+const initialState = {   
     isLoading: false,
     isError: false,
     products: [],
     featureProducts: [],
-//     isSingleLoading: false,
-//     singleProduct: {},
 };
 
-const AppProvider = ({ children }) => { //2
-    const [state, dispatch] = useReducer(reducer, initialState);//09
+const AppProvider = ({ children }) => { 
+    const [state, dispatch] = useReducer(reducer, initialState);
 
-    const getProducts = async (url) => { //08
-        dispatch({ type: "SET_LOADING" });  // 15
-        try { //14
-            const res = await axios.get(url); //08.1 import axios and console res get data
-            const products = await res.data; //08.2 console p.
-            dispatch({ type: "SET_API_DATA", payload: products });    //13
+    const getProducts = async (url) => { 
+        dispatch({ type: "SET_LOADING" });  
+        try { 
+            const res = await axios.get(url); 
+            const products = await res.data;
+            dispatch({ type: "SET_API_DATA", payload: products });  
         } catch (error) {
             dispatch({ type: "API_ERROR" });
         }
     };
 
-    useEffect(() => { //07
+    useEffect(() => { 
         getProducts(API);
     }, []);
 
-    return ( //05 ignore value={{ ...state, getSingleProduct }}
-        <AppContext.Provider value={{ ...state }}> {/* //11 --> goto p.reducer file*/}
+    return ( 
+        <AppContext.Provider value={{ ...state }}> 
             {children}
         </AppContext.Provider>
     );
@@ -48,5 +46,5 @@ const useProductContext = () => {
     return useContext(AppContext);
 };
 
-export { AppProvider, AppContext, useProductContext }; //03 AppProvider and 06 AppContext, useProductContext
+export { AppProvider, AppContext, useProductContext }; 
 
