@@ -1,13 +1,13 @@
-const ProductReducer = (state, action) => { //12 go productContex file
+const ProductReducer = (state, action) => { 
 
-    switch (action.type) { //16  1234 --> 17 filter_context
-      case "SET_LOADING": //16.1
+    switch (action.type) { 
+      case "SET_LOADING": 
         return {
           ...state,
           isLoading: true,
         };
   
-      case "SET_API_DATA": //16.4
+      case "SET_API_DATA": 
 
         return {
           ...state,
@@ -16,7 +16,7 @@ const ProductReducer = (state, action) => { //12 go productContex file
           featureProducts: action.payload,
         };
   
-      case "API_ERROR": //16.3
+      case "API_ERROR": 
         return {
           ...state,
           isLoading: false,
@@ -25,7 +25,7 @@ const ProductReducer = (state, action) => { //12 go productContex file
   
 
   
-      default: //16.2
+      default: 
         return state;
     }
   };
